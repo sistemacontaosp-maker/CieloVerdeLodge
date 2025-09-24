@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Formulario de Reservas - Cielo Verde Lodge & Spa</title>
+    <style>
+        body {
+            font-family: -apple-system, Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            -webkit-text-size-adjust: 100%;
+            touch-action: manipulation;
+        }
+        .form-container {
+            max-width: 600px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #228B22;
+            font-size: 24px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #000000;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #E0F7E0;
+            font-size: 16px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: inner-spin-button;
+            opacity: 1;
+            width: 40px;
+            height: 60px;
+            margin: 0;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .room-section {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .room-section select {
+            flex: 2;
+            margin-right: 10px;
+        }
+        .room-section input[type="number"] {
+            flex: 1;
+            min-width: 100px;
+        }
+        .add-room-btn, .remove-room-btn {
+            display: inline-block;
+            margin: 10px 5px 0 0;
+            padding: 8px 12px;
+            background-color: #228B22;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .add-room-btn:hover, .remove-room-btn:hover {
+            background-color: #1E7A1E;
+        }
+        .remove-room-btn {
+            background-color: #FF0000;
+        }
+        .remove-room-btn:hover {
+            background-color: #CC0000;
+        }
+        .quantity-section {
+            display: flex;
+            justify-content: space-between;
+        }
+        .quantity-section > div {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .quantity-section > div:last-child {
+            margin-right: 0;
+        }
+        .children-ages {
+            margin-top: 10px;
+        }
+        .children-ages select {
+            margin-top: 5px;
+        }
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .whatsapp-btn:hover {
+            background-color: #1EBE57;
+        }
+        .copy-btn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 10px;
+            }
+            .room-section {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .room-section select {
+                width: 65%;
+                margin-right: 5px;
+                margin-bottom: 0;
+            }
+            .room-section input[type="number"] {
+                width: 35%;
+                margin-bottom: 0;
+            }
+            .quantity-section {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            .quantity-section > div {
+                width: 48%;
+                margin-right: 0;
+                margin-bottom: 0;
+            }
+            input, select, textarea {
+                font-size: 16px;
+            }
+            .add-room-btn, .remove-room-btn {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🌿 Cielo Verde Lodge & Spa 🌿</h1>
+        <form id="reservationForm">
+            <label for="fullName">Nombre completo:</label>
+            <input type="text" id="fullName" required>
+
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" required>
+
+            <label for="checkIn">Fecha de entrada:</label>
+            <input type="date" id="checkIn" required>
+
+            <label for="checkOut">Fecha de salida:</label>
+            <input type="date" id="checkOut" required>
+
+            <label for="planType">Tipo de plan:</label>
+            <select id="planType" required>
+                <option value="">Seleccione un plan</option>
+                <option value="Noche estrellada">Plan Noche estrellada (Hospedaje y desayuno)</option>
+                <option value="Relax">Plan Relax (Hospedaje, Cena y Desayuno)</option>
+                <option value="Eco Aventura">Plan Eco Aventura (Hospedaje, Cena, Desayuno y 2 Actividades)</option>
+            </select>
+
+            <label>Habitaciones:</label>
+            <div id="roomsContainer">
+                <div class="room-section">
+                    <select class="roomType" required>
+                        <option value="">Seleccione tipo</option>
+                        <option value="Individual">Individual</option>
+                        <option value="Doble">Doble</option>
+                        <option value="Terzetto">Terzetto (3 camas twin)</option>
+                        <option value="Triple">Triple (1 cama matrimonial, 1 twin)</option>
+                        <option value="Cuádruple">Cuádruple (1 cama matrimonial, 2 twin)</option>
+                    </select>
+                    <input type="number" class="roomQuantity" min="1" value="1" required>
+                </div>
+            </div>
+            <button type="button" class="add-room-btn" onclick="addRoom()">Añadir Habitación</button>
+            <button type="button" class="remove-room-btn" onclick="removeRoom()" disabled>Eliminar Habitación</button>
+
+            <div class="quantity-section">
+                <div>
+                    <label for="adults">Número de adultos:</label>
+                    <input type="number" id="adults" min="0" value="0" required>
+                </div>
+                <div>
+                    <label for="children">Número de niños:</label>
+                    <input type="number" id="children" min="0" value="0" required onchange="updateChildrenAges()" oninput="updateChildrenAges()">
+                </div>
+            </div>
+            <div id="childrenAges" class="children-ages"></div>
+
+            <label for="advancePayment">Valor del anticipo entregado:</label>
+            <input type="text" id="advancePayment" pattern="\d+,\d{2}" placeholder="Ej: 100,00" required>
+
+            <label for="restrictions">Restricciones Alimentarias o Alergias:</label>
+            <textarea id="restrictions" placeholder="Ej: Requiere dieta sin gluten, alergia a nueces."></textarea>
+
+            <label>Datos de facturación:</label>
+            <label for="idRuc">Cédula o RUC:</label>
+            <input type="text" id="idRuc" required>
+
+            <label for="fullNameBilling">Nombres y apellidos o Razón Social:</label>
+            <input type="text" id="fullNameBilling" required>
+
+            <label for="address">Dirección:</label>
+            <input type="text" id="address" required>
+
+            <label for="phoneBilling">Teléfono:</label>
+            <input type="tel" id="phoneBilling" required>
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" required>
+
+            <button type="button" class="whatsapp-btn" onclick="sendToWhatsApp()">Enviar por WhatsApp</button>
+            <button type="button" class="copy-btn" onclick="copyInfo()">Copiar Información</button>
+        </form>
+    </div>
+
+    <script>
+        let roomCount = 1;
+
+        function addRoom() {
+            const container = document.getElementById('roomsContainer');
+            const newRoom = document.createElement('div');
+            newRoom.className = 'room-section';
+            newRoom.innerHTML = `
+                <select class="roomType" required>
+                    <option value="">Seleccione tipo</option>
+                    <option value="Individual">Individual</option>
+                    <option value="Doble">Doble</option>
+                    <option value="Terzetto">Terzetto (3 camas twin)</option>
+                    <option value="Triple">Triple (1 cama matrimonial, 1 twin)</option>
+                    <option value="Cuádruple">Cuádruple (1 cama matrimonial, 2 twin)</option>
+                </select>
+                <input type="number" class="roomQuantity" min="1" value="1" required>
+            `;
+            container.appendChild(newRoom);
+            roomCount++;
+            updateRemoveButton();
+        }
+
+        function removeRoom() {
+            const container = document.getElementById('roomsContainer');
+            if (roomCount > 1) {
+                container.removeChild(container.lastChild);
+                roomCount--;
+                updateRemoveButton();
+            }
+        }
+
+        function updateRemoveButton() {
+            const removeBtn = document.querySelector('.remove-room-btn');
+            removeBtn.disabled = roomCount <= 1;
+        }
+
+        function updateChildrenAges() {
+            const numChildren = parseInt(document.getElementById('children').value) || 0;
+            const container = document.getElementById('childrenAges');
+            container.innerHTML = '';
+            for (let i = 1; i <= numChildren; i++) {
+                const label = document.createElement('label');
+                label.textContent = `Edad del niño ${i}:`;
+                const select = document.createElement('select');
+                select.required = true;
+                select.innerHTML = `
+                    <option value="">Seleccione edad</option>
+                    <option value="0-3">0 a 3 años</option>
+                    <option value="4-7">4 a 7 años</option>
+                    <option value="8-11">8 a 11 años</option>
+                `;
+                container.appendChild(label);
+                container.appendChild(select);
+            }
+        }
+
+        function getFormInfo() {
+            // Obtener valores de los campos
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            const planType = document.getElementById('planType').value;
+            const adults = parseInt(document.getElementById('adults').value) || 0;
+            const children = parseInt(document.getElementById('children').value) || 0;
+            const advancePayment = document.getElementById('advancePayment').value.trim();
+            const idRuc = document.getElementById('idRuc').value.trim();
+            const fullNameBilling = document.getElementById('fullNameBilling').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const phoneBilling = document.getElementById('phoneBilling').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            // Lista de campos faltantes
+            const missingFields = [];
+
+            // Validar campos obligatorios
+            if (!fullName) missingFields.push('Nombre completo');
+            if (!phone) missingFields.push('Teléfono');
+            if (!checkIn) missingFields.push('Fecha de entrada');
+            if (!checkOut) missingFields.push('Fecha de salida');
+            if (!planType) missingFields.push('Tipo de plan');
+            if (adults < 0) missingFields.push('Número de adultos');
+            if (children < 0) missingFields.push('Número de niños');
+            if (!advancePayment) missingFields.push('Valor del anticipo entregado');
+            if (!idRuc) missingFields.push('Cédula o RUC');
+            if (!fullNameBilling) missingFields.push('Nombres y apellidos o Razón Social');
+            if (!address) missingFields.push('Dirección');
+            if (!phoneBilling) missingFields.push('Teléfono (facturación)');
+            if (!email) missingFields.push('Correo electrónico');
+
+            // Validar al menos una habitación
+            const roomTypes = document.querySelectorAll('.roomType');
+            const roomQuantities = document.querySelectorAll('.roomQuantity');
+            const validRooms = [];
+            for (let i = 0; i < roomTypes.length; i++) {
+                const type = roomTypes[i].value;
+                const qty = parseInt(roomQuantities[i].value) || 0;
+                if (type && qty > 0) {
+                    validRooms.push({ type, qty });
+                } else if (type && qty <= 0) {
+                    missingFields.push(`Cantidad de habitación ${i + 1}`);
+                }
+            }
+            if (validRooms.length === 0) {
+                missingFields.push('Al menos una habitación con tipo y cantidad mayor a 0');
+            }
+
+            // Validar edades de niños
+            const ages = document.querySelectorAll('#childrenAges select');
+            if (children > 0) {
+                for (let i = 0; i < children; i++) {
+                    if (!ages[i] || !ages[i].value) {
+                        missingFields.push(`Edad del niño ${i + 1}`);
+                    }
+                }
+            }
+
+            // Mostrar mensaje de error si hay campos faltantes
+            if (missingFields.length > 0) {
+                alert('Por favor, complete los siguientes campos:\n- ' + missingFields.join('\n- '));
+                return null;
+            }
+
+            // Construir la información
+            let info = 'Reserva en Cielo Verde Lodge & Spa\n\n';
+            info += `Nombre completo: ${fullName}\n`;
+            info += `Teléfono: ${phone}\n`;
+            info += `Fecha de entrada: ${checkIn}\n`;
+            info += `Fecha de salida: ${checkOut}\n`;
+            info += `Tipo de plan: ${planType}\n`;
+
+            info += 'Habitaciones:\n';
+            validRooms.forEach(room => {
+                info += `- ${room.type}: ${room.qty} habitaciones\n`;
+            });
+
+            info += `Número de adultos: ${adults}\n`;
+            info += `Número de niños: ${children}\n`;
+
+            if (children > 0) {
+                info += 'Edades de niños:\n';
+                ages.forEach((age, index) => {
+                    if (age.value) {
+                        info += `- Niño ${index + 1}: ${age.value}\n`;
+                    }
+                });
+            }
+
+            info += `Anticipo entregado: ${advancePayment}\n`;
+            info += `Restricciones/Alergias: ${document.getElementById('restrictions').value.trim() || 'Ninguna'}\n`;
+
+            info += 'Datos de facturación:\n';
+            info += `Cédula o RUC: ${idRuc}\n`;
+            info += `Nombres/Razón Social: ${fullNameBilling}\n`;
+            info += `Dirección: ${address}\n`;
+            info += `Teléfono: ${phoneBilling}\n`;
+            info += `Correo: ${email}\n`;
+
+            return info;
+        }
+
+        function sendToWhatsApp() {
+            const info = getFormInfo();
+            if (!info) return;
+
+            const encodedMessage = encodeURIComponent(info);
+            const whatsappWebUrl = `https://wa.me/?text=${encodedMessage}`;
+            window.open(whatsappWebUrl, '_blank');
+        }
+
+        function copyInfo() {
+            const info = getFormInfo();
+            if (!info) return;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(info).then(() => {
+                    alert('Información copiada al portapapeles. Pégala en WhatsApp.');
+                }).catch(() => {
+                    fallbackCopy(info);
+                });
+            } else {
+                fallbackCopy(info);
+            }
+        }
+
+        function fallbackCopy(info) {
+            const textArea = document.createElement('textarea');
+            textArea.value = info;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('Información copiada al portapapeles. Pégala en WhatsApp.');
+            } catch (err) {
+                alert('Error al copiar. Copia manualmente:\n\n' + info);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
